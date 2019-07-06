@@ -1,6 +1,6 @@
-require "wispro/version"
+require 'httparty'
+require 'logger'
 
-module Wispro
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require 'wispro/version'
+require 'wispro/logger'
+require 'wispro/client'
