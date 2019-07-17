@@ -13,9 +13,16 @@ module Wispro
 
     def client(id)
       req = fetch_data("/clients/#{id}")
-      return false unless req.parsed_response['status'] == 200
+      return false unless req['status'] == 200
 
-      req.parsed_response['data']
+      req['data']
+    end
+
+    def update_client(id, data)
+      req = update_data("/clients/#{id}", body: data)
+      return false unless req['status'] == 200
+
+      req['data']
     end
 
     def contracts
@@ -24,9 +31,16 @@ module Wispro
 
     def contract(id)
       req = fetch_data("/contracts/#{id}")
-      return false unless req.parsed_response['status'] == 200
+      return false unless req['status'] == 200
 
-      req.parsed_response['data']
+      req['data']
+    end
+
+    def update_contract(id, data)
+      req = update_data("/contracts/#{id}", body: data)
+      return false unless req['status'] == 200
+
+      req['data']
     end
 
     def plans
@@ -35,9 +49,16 @@ module Wispro
 
     def plan(id)
       req = fetch_data("/plans/#{id}")
-      return false unless req.parsed_response['status'] == 200
+      return false unless req['status'] == 200
 
-      req.parsed_response['data']
+      req['data']
+    end
+
+    def update_plan(id, data)
+      req = update_data("/plans/#{id}", body: data)
+      return false unless req['status'] == 200
+
+      req['data']
     end
 
     def bmus
@@ -46,9 +67,9 @@ module Wispro
 
     def bmu(id)
       req = fetch_data("/bmus/#{id}")
-      return false unless req.parsed_response['status'] == 200
+      return false unless req['status'] == 200
 
-      req.parsed_response['data']
+      req['data']
     end
 
     def mikrotiks
@@ -57,9 +78,9 @@ module Wispro
 
     def mikrotik(id)
       req = fetch_data("/mikrotiks/#{id}")
-      return false unless req.parsed_response['status'] == 200
+      return false unless req['status'] == 200
 
-      req.parsed_response['data']
+      req['data']
     end
 
     private
@@ -67,7 +88,7 @@ module Wispro
     def fetch_data(path, parameters = {})
       Wispro.logger.debug "GET - #{path} - #{parameters}"
       parameters.merge!(@options)
-      self.class.get(path, parameters)
+      self.class.get(path, parameters).parsed_response
     end
 
     def fetch_paginated_data(path)
@@ -75,7 +96,7 @@ module Wispro
       results = []
 
       loop do
-        req = fetch_data(path, query: { page: page }).parsed_response
+        req = fetch_data(path, query: { page: page })
         break unless req['status'] == 200
 
         results.concat(req['data'])
@@ -86,6 +107,12 @@ module Wispro
       end
 
       results
+    end
+
+    def update_data(path, parameters = {})
+      Wispro.logger.debug "PUT - #{path} - #{parameters}"
+      parameters.merge!(@options)
+      self.class.put(path, parameters).parsed_response
     end
   end
 end
