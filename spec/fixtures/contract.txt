@@ -1,0 +1,12 @@
+HTTP/1.1 200 OK
+Date: Thu, 18 Jul 2019 03:02:50 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 338
+Connection: close
+etag: W/"ce576e78b86da25fa639a00aec72a238"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: 9afb3295-15c9-4c0f-9157-0bf23486e0e4
+x-runtime: 0.013718
+last-modified: Thu, 17 Jul 2019 03:02:50 GMT
+
+{"status":200,"meta":{"object":"contract"},"data":{"id":"adccdca2-6f60-41d2-b853-c44ac80c5cbf","plan_id":"0a941d3d-c6ef-4056-8663-65b8a0a14636","client_id":"0aeab3cc-5b55-4a0e-b39f-30725625ff88","server_configuration_id":"b4e9ce01-8abb-428f-a3f1-2c7f035a643a","state":"enabled","ip":"10.1.1.0","netmask":"255.255.255.0","mac_address":""}}

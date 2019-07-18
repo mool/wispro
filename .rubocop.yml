@@ -33,3 +33,9 @@ Style/ClassAndModuleChildren:
 
 Style/MixinUsage:
   Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 100

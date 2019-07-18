@@ -1,0 +1,12 @@
+HTTP/1.1 200 OK
+Date: Thu, 18 Jul 2019 02:57:20 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 237
+Connection: close
+etag: W/"505850a55f0620e4050c699197bb360f"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: bb4665e4-f756-4073-a137-7cb01a660bf6
+x-runtime: 0.011635
+last-modified: Thu, 17 Jul 2019 02:57:19 GMT
+
+{"status":200,"meta":{"object":"plan"},"data":{"id":"0a941d3d-c6ef-4056-8663-65b8a0a14636","name":"Interno","public_id":4,"cir":"1.0","ceil_down_kbps":40960,"ceil_up_kbps":40000,"price":"0.0","frequency_in_months":1,"contracts_count":6}}
