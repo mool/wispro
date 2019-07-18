@@ -1,0 +1,12 @@
+HTTP/1.1 200 OK
+Date: Wed, 17 Jul 2019 23:47:47 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 1887
+Connection: close
+etag: W/"72630c7c4fd53ef4e224cb268b1c0a55"
+cache-control: max-age=0, private, must-revalidate
+x-request-id: 7f04d6dd-40c9-4571-94a1-9a9f8eeae0f7
+x-runtime: 0.019998
+last-modified: Wed, 16 Jul 2019 23:47:46 GMT
+
+{"status":200,"meta":{"object":"client","pagination":{"total_records":40,"total_pages":2,"per_page":20,"current_page":2}},"data":[{"id":"98eb8abb-684b-4981-9ebb-d0d6a4b09a0c","name":"xxxx","public_id":21},{"id":"18c71166-2eb4-444f-acf1-f6c5a8dcb6f2","name":"xxxx","public_id":22},{"id":"66057f09-fc96-467f-982a-d9d82badd16b","name":"xxxx","public_id":23},{"id":"e4338309-f9ca-4f69-a1a7-9f9e956dba81","name":"xxxx","public_id":24},{"id":"f725a02a-86a3-4883-925e-e5bd5d920123","name":"xxxx","public_id":25},{"id":"21cd9f02-af98-4047-9235-6c71a2138993","name":"xxxx","public_id":26},{"id":"831f7f6a-b69d-4921-bd56-5d16086b9327","name":"xxxx","public_id":27},{"id":"0181fbd4-e9fb-4b86-a259-d9ed49e36db3","name":"xxxx","public_id":28},{"id":"10527527-37da-4d6c-936e-be19f69e7eda","name":"xxxx","public_id":29},{"id":"abbaa2a0-ef12-481d-b957-e64cfe99b36a","name":"xxxx","public_id":30},{"id":"4603effa-f1ad-4c5a-9116-766298f214d3","name":"xxxx","public_id":31},{"id":"59472335-1fd5-496e-9826-677db463da04","name":"xxxx","public_id":32},{"id":"94213e40-aaf0-433d-a3cc-712c16637b63","name":"xxxx","public_id":33},{"id":"204a01a7-a9be-4063-814e-4df17b9f7881","name":"xxxx","public_id":34},{"id":"c37dc471-5016-486f-a909-4b99968d978f","name":"xxxx","public_id":35},{"id":"999d3337-04a4-49c7-91e8-53badbc4f69a","name":"xxxx","public_id":36},{"id":"a6b4f039-e6f6-46cb-9ee6-3dd5c17db499","name":"xxxx","public_id":37},{"id":"0d4e2270-617a-40e5-8658-818535c17ae5","name":"xxxx","public_id":38},{"id":"5b0e8baa-ce12-48c7-8a29-dd541c83e3c7","name":"xxxx","public_id":39},{"id":"929210c7-c922-496e-907f-e01b71599cb8","name":"xxxx","public_id":40}]}
