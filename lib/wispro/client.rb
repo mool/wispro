@@ -13,24 +13,17 @@ module Wispro
       define_method model do |&block|
         fetch_paginated_data("/#{model}") { |rows| block.call(rows) if block }
       end
-    end
 
-    def client(id)
-      req = fetch_data("/clients/#{id}")
-      return false unless req['status'] == 200
+      define_method model.to_s.singularize do |id|
+        req = fetch_data("/#{model}/#{id}")
+        return false unless req['status'] == 200
 
-      req['data']
+        req['data']
+      end
     end
 
     def update_client(id, data)
       req = update_data("/clients/#{id}", body: data)
-      return false unless req['status'] == 200
-
-      req['data']
-    end
-
-    def contract(id)
-      req = fetch_data("/contracts/#{id}")
       return false unless req['status'] == 200
 
       req['data']
@@ -43,30 +36,8 @@ module Wispro
       req['data']
     end
 
-
-    def plan(id)
-      req = fetch_data("/plans/#{id}")
-      return false unless req['status'] == 200
-
-      req['data']
-    end
-
     def update_plan(id, data)
       req = update_data("/plans/#{id}", body: data)
-      return false unless req['status'] == 200
-
-      req['data']
-    end
-
-    def bmu(id)
-      req = fetch_data("/bmus/#{id}")
-      return false unless req['status'] == 200
-
-      req['data']
-    end
-
-    def mikrotik(id)
-      req = fetch_data("/mikrotiks/#{id}")
       return false unless req['status'] == 200
 
       req['data']
