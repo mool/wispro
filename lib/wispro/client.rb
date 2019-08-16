@@ -3,12 +3,16 @@ module Wispro
     include HTTParty
     base_uri 'https://www.cloud.wispro.co/api/v1'
 
+    PAGINATED_MODELS = %i[plans contracts clients bmus mikrotiks]
+
     def initialize(token)
       @options = { headers: { 'Authorization' => token } }
     end
 
-    def clients
-      fetch_paginated_data('/clients')
+    PAGINATED_MODELS.each do |model|
+      define_method model do |&block|
+        fetch_paginated_data("/#{model}") { |rows| block.call(rows) if block }
+      end
     end
 
     def client(id)
@@ -25,10 +29,6 @@ module Wispro
       req['data']
     end
 
-    def contracts
-      fetch_paginated_data('/contracts')
-    end
-
     def contract(id)
       req = fetch_data("/contracts/#{id}")
       return false unless req['status'] == 200
@@ -43,9 +43,6 @@ module Wispro
       req['data']
     end
 
-    def plans
-      fetch_paginated_data('/plans')
-    end
 
     def plan(id)
       req = fetch_data("/plans/#{id}")
@@ -61,19 +58,11 @@ module Wispro
       req['data']
     end
 
-    def bmus
-      fetch_paginated_data('/bmus')
-    end
-
     def bmu(id)
       req = fetch_data("/bmus/#{id}")
       return false unless req['status'] == 200
 
       req['data']
-    end
-
-    def mikrotiks
-      fetch_paginated_data('/mikrotiks')
     end
 
     def mikrotik(id)
@@ -98,6 +87,8 @@ module Wispro
       loop do
         req = fetch_data(path, query: { page: page })
         break unless req['status'] == 200
+
+        yield req['data'] if block_given?
 
         results.concat(req['data'])
 
