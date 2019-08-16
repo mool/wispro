@@ -3,19 +3,25 @@ module Wispro
     include HTTParty
     base_uri 'https://www.cloud.wispro.co/api/v1'
 
-    PAGINATED_MODELS = %i[plans contracts clients bmus mikrotiks]
+    PAGINATED_MODELS = {
+      bmus:      :bmu,
+      clients:   :client,
+      contracts: :contract,
+      mikrotiks: :mikrotik,
+      plans:     :plan
+    }.freeze
 
     def initialize(token)
       @options = { headers: { 'Authorization' => token } }
     end
 
-    PAGINATED_MODELS.each do |model|
-      define_method model do |&block|
-        fetch_paginated_data("/#{model}") { |rows| block.call(rows) if block }
+    PAGINATED_MODELS.each do |plural, singular|
+      define_method plural do |&block|
+        fetch_paginated_data("/#{plural}") { |rows| block&.call(rows) }
       end
 
-      define_method model.to_s.singularize do |id|
-        req = fetch_data("/#{model}/#{id}")
+      define_method singular do |id|
+        req = fetch_data("/#{plural}/#{id}")
         return false unless req['status'] == 200
 
         req['data']

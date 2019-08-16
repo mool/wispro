@@ -39,3 +39,13 @@ Metrics/BlockLength:
 
 Metrics/LineLength:
   Max: 100
+
+Metrics/MethodLength:
+  Max: 50
+
+Style/AlignHash:
+  Description: "Align the elements of a hash literal if they span more than one line."
+  Enabled: true
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
