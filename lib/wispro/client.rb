@@ -7,7 +7,9 @@ module Wispro
       bmus:      :bmu,
       clients:   :client,
       contracts: :contract,
+      coverages: :coverage,
       mikrotiks: :mikrotik,
+      nodes:     :node,
       plans:     :plan
     }.freeze
 
