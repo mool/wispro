@@ -3,34 +3,35 @@ module Wispro
     include HTTParty
     base_uri 'https://www.cloud.wispro.co/api/v1'
 
+    PAGINATED_MODELS = {
+      bmus:      :bmu,
+      clients:   :client,
+      contracts: :contract,
+      coverages: :coverage,
+      mikrotiks: :mikrotik,
+      nodes:     :node,
+      plans:     :plan
+    }.freeze
+
     def initialize(token)
       @options = { headers: { 'Authorization' => token } }
     end
 
-    def clients
-      fetch_paginated_data('/clients')
-    end
+    PAGINATED_MODELS.each do |plural, singular|
+      define_method plural do |&block|
+        fetch_paginated_data("/#{plural}") { |rows| block&.call(rows) }
+      end
 
-    def client(id)
-      req = fetch_data("/clients/#{id}")
-      return false unless req['status'] == 200
+      define_method singular do |id|
+        req = fetch_data("/#{plural}/#{id}")
+        return false unless req['status'] == 200
 
-      req['data']
+        req['data']
+      end
     end
 
     def update_client(id, data)
       req = update_data("/clients/#{id}", body: data)
-      return false unless req['status'] == 200
-
-      req['data']
-    end
-
-    def contracts
-      fetch_paginated_data('/contracts')
-    end
-
-    def contract(id)
-      req = fetch_data("/contracts/#{id}")
       return false unless req['status'] == 200
 
       req['data']
@@ -43,41 +44,8 @@ module Wispro
       req['data']
     end
 
-    def plans
-      fetch_paginated_data('/plans')
-    end
-
-    def plan(id)
-      req = fetch_data("/plans/#{id}")
-      return false unless req['status'] == 200
-
-      req['data']
-    end
-
     def update_plan(id, data)
       req = update_data("/plans/#{id}", body: data)
-      return false unless req['status'] == 200
-
-      req['data']
-    end
-
-    def bmus
-      fetch_paginated_data('/bmus')
-    end
-
-    def bmu(id)
-      req = fetch_data("/bmus/#{id}")
-      return false unless req['status'] == 200
-
-      req['data']
-    end
-
-    def mikrotiks
-      fetch_paginated_data('/mikrotiks')
-    end
-
-    def mikrotik(id)
-      req = fetch_data("/mikrotiks/#{id}")
       return false unless req['status'] == 200
 
       req['data']
@@ -98,6 +66,8 @@ module Wispro
       loop do
         req = fetch_data(path, query: { page: page })
         break unless req['status'] == 200
+
+        yield req['data'] if block_given?
 
         results.concat(req['data'])
 
